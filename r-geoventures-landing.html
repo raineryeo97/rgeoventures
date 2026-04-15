@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>R Geoventures — Geospatial, Survey & Ground Intelligence</title>
+  <meta name="description" content="R Geoventures helps clients plan, map, and understand terrain through geospatial, survey, and ground intelligence services." />
+  <meta property="og:title" content="R Geoventures" />
+  <meta property="og:description" content="Geospatial, survey, and ground intelligence for projects that need clarity on the ground." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://api.fontshare.com" />
+  <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=cabinet-grotesk@500,700,800&display=swap" rel="stylesheet" />
+  <style>
+    :root, [data-theme="light"] {
+      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+      --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+      --text-2xl: clamp(2.2rem, 1.2rem + 3vw, 4.5rem);
+      --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem; --space-5: 1.25rem; --space-6: 1.5rem; --space-8: 2rem; --space-10: 2.5rem; --space-12: 3rem; --space-16: 4rem; --space-20: 5rem; --space-24: 6rem;
+      --color-bg: #f5f4ef;
+      --color-surface: #fbfaf6;
+      --color-surface-2: #f0ede6;
+      --color-surface-offset: #e8e4da;
+      --color-border: #d3cec3;
+      --color-divider: #ddd7cd;
+      --color-text: #1f241f;
+      --color-text-muted: #657066;
+      --color-text-faint: #90988f;
+      --color-text-inverse: #f7f7f2;
+      --color-primary: #1f5c4d;
+      --color-primary-hover: #19493d;
+      --color-primary-highlight: #d9e5df;
+      --color-gold: #a77a20;
+      --radius-sm: 0.375rem; --radius-md: 0.75rem; --radius-lg: 1rem; --radius-xl: 1.5rem; --radius-full: 9999px;
+      --shadow-sm: 0 1px 2px rgba(30,32,28,.06);
+      --shadow-md: 0 12px 30px rgba(30,32,28,.08);
+      --shadow-lg: 0 24px 60px rgba(30,32,28,.14);
+      --transition: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+      --content: 1180px;
+      --font-body: 'General Sans', Inter, sans-serif;
+      --font-display: 'Cabinet Grotesk', 'General Sans', sans-serif;
+    }
+    [data-theme="dark"] {
+      --color-bg: #121512;
+      --color-surface: #171b17;
+      --color-surface-2: #1c211d;
+      --color-surface-offset: #202720;
+      --color-border: #323a33;
+      --color-divider: #2a312b;
+      --color-text: #e8ebe3;
+      --color-text-muted: #b0b8ad;
+      --color-text-faint: #7f887e;
+      --color-text-inverse: #121512;
+      --color-primary: #67a894;
+      --color-primary-hover: #82b9a7;
+      --color-primary-highlight: #20372f;
+      --color-gold: #d5af5d;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,.3);
+      --shadow-md: 0 12px 30px rgba(0,0,0,.35);
+      --shadow-lg: 0 24px 60px rgba(0,0,0,.4);
+    }
+    *,:before,:after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;-webkit-text-size-adjust:none;text-size-adjust:none}
+    body{min-height:100dvh;font-family:var(--font-body);font-size:var(--text-base);line-height:1.6;background:var(--color-bg);color:var(--color-text)}
+    img,svg{display:block;max-width:100%;height:auto}
+    a,button{transition:all var(--transition)}
+    a{text-decoration:none;color:inherit}
+    button{border:0;background:none;font:inherit;color:inherit;cursor:pointer}
+    :focus-visible{outline:2px solid var(--color-primary);outline-offset:3px;border-radius:var(--radius-sm)}
+    .skip-link{position:absolute;left:-9999px;top:auto}.skip-link:focus{left:1rem;top:1rem;background:var(--color-surface);padding:.75rem 1rem;z-index:200;border-radius:var(--radius-md)}
+    .container{width:min(calc(100% - 2rem),var(--content));margin-inline:auto}
+    .site-header{position:sticky;top:0;z-index:50;background:color-mix(in srgb, var(--color-bg) 88%, transparent);backdrop-filter:blur(14px);border-bottom:1px solid color-mix(in srgb,var(--color-border) 70%, transparent)}
+    .header-inner{display:flex;align-items:center;justify-content:space-between;gap:var(--space-4);padding:var(--space-4) 0}
+    .brand{display:flex;align-items:center;gap:var(--space-3);font-weight:700;letter-spacing:.01em}
+    .brand-mark{width:42px;height:42px;padding:8px;border-radius:12px;background:linear-gradient(180deg,var(--color-surface),var(--color-surface-2));border:1px solid color-mix(in srgb,var(--color-border) 70%, transparent);box-shadow:var(--shadow-sm)}
+    .brand-name{font-size:var(--text-sm)}
+    .nav{display:none;gap:var(--space-6);font-size:var(--text-sm);color:var(--color-text-muted)}
+    .nav a:hover{color:var(--color-text)}
+    .header-actions{display:flex;align-items:center;gap:var(--space-3)}
+    .theme-toggle,.menu-toggle{display:grid;place-items:center;width:44px;height:44px;border-radius:var(--radius-full);border:1px solid color-mix(in srgb,var(--color-border) 72%, transparent);background:var(--color-surface)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:.9rem 1.15rem;border-radius:var(--radius-full);font-size:var(--text-sm);font-weight:600}
+    .btn-primary{background:var(--color-primary);color:var(--color-text-inverse);box-shadow:var(--shadow-sm)}
+    .btn-primary:hover{background:var(--color-primary-hover);transform:translateY(-1px)}
+    .btn-secondary{border:1px solid color-mix(in srgb,var(--color-border) 78%, transparent);background:var(--color-surface)}
+    .btn-secondary:hover{background:var(--color-surface-2)}
+    .hero{padding:clamp(4rem,10vw,7rem) 0 var(--space-20)}
+    .hero-grid{display:grid;gap:var(--space-12);align-items:end}
+    .eyebrow{display:inline-flex;align-items:center;gap:.6rem;padding:.45rem .75rem;border-radius:var(--radius-full);background:var(--color-primary-highlight);color:var(--color-primary);font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.12em;font-weight:700}
+    .eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+    h1{font-family:var(--font-display);font-size:var(--text-2xl);line-height:.98;letter-spacing:-.04em;max-width:12ch;margin-top:var(--space-5)}
+    .hero-copy p{margin-top:var(--space-5);max-width:58ch;color:var(--color-text-muted)}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:var(--space-3);margin-top:var(--space-8)}
+    .hero-meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-4);margin-top:var(--space-10)}
+    .metric{padding:var(--space-4);background:var(--color-surface);border:1px solid color-mix(in srgb,var(--color-border) 78%, transparent);border-radius:var(--radius-lg)}
+    .metric strong{display:block;font-size:var(--text-lg);font-family:var(--font-display)}
+    .metric span{display:block;font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.08em;color:var(--color-text-muted);margin-top:.25rem}
+    .hero-card{position:relative;padding:var(--space-6);background:linear-gradient(180deg,var(--color-surface),var(--color-surface-2));border:1px solid color-mix(in srgb,var(--color-border) 75%, transparent);border-radius:calc(var(--radius-xl) + 4px);box-shadow:var(--shadow-lg);overflow:hidden;min-height:520px}
+    .terrain{position:absolute;inset:auto -10% -6% -10%;height:62%;opacity:.95}
+    .grid-lines{position:absolute;inset:0;background-image:linear-gradient(color-mix(in srgb,var(--color-border) 50%, transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--color-border) 50%, transparent) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,rgba(0,0,0,.16),rgba(0,0,0,0));pointer-events:none}
+    .floating-panel{position:relative;z-index:2;max-width:320px;margin-left:auto;background:color-mix(in srgb,var(--color-surface) 82%, transparent);backdrop-filter:blur(12px);border:1px solid color-mix(in srgb,var(--color-border) 78%, transparent);padding:var(--space-5);border-radius:var(--radius-lg);box-shadow:var(--shadow-md)}
+    .floating-panel h2{font-size:var(--text-lg);font-family:var(--font-display);line-height:1.05}
+    .floating-panel p{font-size:var(--text-sm);color:var(--color-text-muted);margin-top:var(--space-3)}
+    .panel-list{display:grid;gap:var(--space-3);margin-top:var(--space-5)}
+    .panel-item{display:flex;justify-content:space-between;gap:var(--space-4);padding-bottom:var(--space-3);border-bottom:1px solid var(--color-divider);font-size:var(--text-sm)}
+    .panel-item:last-child{border-bottom:0;padding-bottom:0}
+    .section{padding:clamp(4rem,8vw,7rem) 0}
+    .section-head{display:grid;gap:var(--space-4);margin-bottom:var(--space-10)}
+    .section-head h2{font-family:var(--font-display);font-size:var(--text-xl);letter-spacing:-.03em;line-height:1}
+    .section-head p{color:var(--color-text-muted);max-width:62ch}
+    .services{display:grid;gap:var(--space-4)}
+    .service-card{padding:var(--space-6);background:var(--color-surface);border:1px solid color-mix(in srgb,var(--color-border) 78%, transparent);border-radius:var(--radius-xl);box-shadow:var(--shadow-sm)}
+    .service-card h3{font-size:var(--text-lg);font-family:var(--font-display);line-height:1.1}
+    .service-card p{margin-top:var(--space-3);color:var(--color-text-muted)}
+    .service-card .tag{display:inline-block;margin-top:var(--space-4);font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.08em;color:var(--color-primary)}
+    .split{display:grid;gap:var(--space-6)}
+    .process{padding:var(--space-6);background:var(--color-surface);border-radius:var(--radius-xl);border:1px solid color-mix(in srgb,var(--color-border) 78%, transparent)}
+    .steps{display:grid;gap:var(--space-4);margin-top:var(--space-6)}
+    .step{display:grid;grid-template-columns:auto 1fr;gap:var(--space-4);align-items:start;padding-top:var(--space-4);border-top:1px solid var(--color-divider)}
+    .step:first-child{padding-top:0;border-top:0}
+    .step-num{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--color-primary-highlight);color:var(--color-primary);font-size:var(--text-sm);font-weight:700}
+    .proof{padding:var(--space-6);background:linear-gradient(180deg,var(--color-surface),var(--color-surface-2));border-radius:var(--radius-xl);border:1px solid color-mix(in srgb,var(--color-border) 78%, transparent)}
+    .proof-grid{display:grid;gap:var(--space-4);margin-top:var(--space-6)}
+    .proof-item{padding:var(--space-4);border-radius:var(--radius-lg);background:color-mix(in srgb,var(--color-bg) 45%, var(--color-surface));border:1px solid color-mix(in srgb,var(--color-border) 70%, transparent)}
+    .cta{padding:clamp(3rem,7vw,5rem);background:var(--color-primary);color:var(--color-text-inverse);border-radius:calc(var(--radius-xl) + 8px);display:grid;gap:var(--space-6);box-shadow:var(--shadow-lg)}
+    .cta p{max-width:56ch;color:color-mix(in srgb,var(--color-text-inverse) 78%, transparent)}
+    .cta .btn-primary{background:var(--color-text-inverse);color:var(--color-primary)}
+    .cta .btn-secondary{background:transparent;border-color:color-mix(in srgb,var(--color-text-inverse) 32%, transparent);color:var(--color-text-inverse)}
+    .site-footer{padding:var(--space-8) 0 var(--space-12);color:var(--color-text-muted)}
+    .footer-inner{display:flex;flex-direction:column;gap:var(--space-4);padding-top:var(--space-6);border-top:1px solid var(--color-divider)}
+    .mobile-nav{display:none;position:absolute;left:1rem;right:1rem;top:calc(100% + .5rem);padding:var(--space-4);background:var(--color-surface);border:1px solid color-mix(in srgb,var(--color-border) 78%, transparent);border-radius:var(--radius-lg);box-shadow:var(--shadow-md)}
+    .mobile-nav a{display:block;padding:.85rem .5rem;color:var(--color-text-muted)}
+    .mobile-nav a+a{border-top:1px solid var(--color-divider)}
+    .mobile-nav[data-open="true"]{display:block}
+    @media (min-width: 840px){
+      .nav{display:flex}
+      .menu-toggle{display:none}
+      .hero-grid{grid-template-columns:minmax(0,1.05fr) minmax(420px,.95fr)}
+      .services{grid-template-columns:1.2fr .9fr .9fr}
+      .split{grid-template-columns:1.1fr .9fr}
+      .footer-inner{flex-direction:row;justify-content:space-between;align-items:center}
+    }
+    @media (max-width: 839px){
+      .header-actions .btn-secondary{display:none}
+      .hero-card{min-height:420px}
+      h1{max-width:11ch}
+    }
+    @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important}}
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="R Geoventures home">
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true" fill="none">
+          <path d="M14 48V16h16c9 0 14 4 14 11 0 5-3 8-8 10l12 11" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M18 33h18" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/>
+          <path d="M42 18l8 8 8-8" stroke="#a77a20" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="brand-name">R Geoventures</span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#services">Services</a>
+        <a href="#approach">Approach</a>
+        <a href="#why-us">Why us</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <a class="btn btn-secondary" href="#contact">Get a quote</a>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch theme">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+      </div>
+      <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile"></nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">Grounded project intelligence</span>
+          <h1>From terrain to decisions, R Geoventures gives projects a clearer view of the ground.</h1>
+          <p>Built for clients who need practical geospatial, survey, and site intelligence, this landing page positions R Geoventures as a precise, dependable partner for mapping, field data, and project planning.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contact">Start a project</a>
+            <a class="btn btn-secondary" href="#services">Explore services</a>
+          </div>
+          <div class="hero-meta" aria-label="Key highlights">
+            <div class="metric"><strong>Survey-ready</strong><span>Field-informed execution</span></div>
+            <div class="metric"><strong>Data-led</strong><span>Clear outputs for decisions</span></div>
+          </div>
+        </div>
+        <div class="hero-card" aria-hidden="true">
+          <div class="grid-lines"></div>
+          <div class="floating-panel">
+            <h2>Landing page concept</h2>
+            <p>A calm, technical first impression with terrain lines, measured spacing, and one strong call to action.</p>
+            <div class="panel-list">
+              <div class="panel-item"><span>Positioning</span><strong>Precision + trust</strong></div>
+              <div class="panel-item"><span>Audience</span><strong>Developers, contractors, planners</strong></div>
+              <div class="panel-item"><span>Primary CTA</span><strong>Get a quote</strong></div>
+            </div>
+          </div>
+          <svg class="terrain" viewBox="0 0 800 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="terrainFill" x1="400" y1="0" x2="400" y2="420" gradientUnits="userSpaceOnUse">
+                <stop stop-color="var(--color-primary-highlight)"/>
+                <stop offset="1" stop-color="transparent"/>
+              </linearGradient>
+            </defs>
+            <path d="M30 310C80 250 135 255 190 220C245 185 270 140 340 138C410 136 437 192 510 200C590 209 626 150 695 168C738 180 766 214 792 248V420H30V310Z" fill="url(#terrainFill)" opacity="0.92"/>
+            <g stroke="var(--color-primary)" stroke-opacity="0.6" stroke-width="2">
+              <path d="M30 284C84 235 130 245 190 214C249 183 278 130 342 129C409 128 444 180 512 188C594 198 627 138 700 159C738 170 766 205 792 234"/>
+              <path d="M30 304C84 255 130 265 190 234C249 203 278 150 342 149C409 148 444 200 512 208C594 218 627 158 700 179C738 190 766 225 792 254"/>
+              <path d="M30 324C84 275 130 285 190 254C249 223 278 170 342 169C409 168 444 220 512 228C594 238 627 178 700 199C738 210 766 245 792 274"/>
+              <path d="M30 344C84 295 130 305 190 274C249 243 278 190 342 189C409 188 444 240 512 248C594 258 627 198 700 219C738 230 766 265 792 294"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-head">
+          <h2>What the page says</h2>
+          <p>For a young consulting or field-services brand, the landing page should explain the offer immediately, then back it up with a few focused capabilities rather than a long generic list.</p>
+        </div>
+        <div class="services">
+          <article class="service-card">
+            <h3>Geospatial and mapping support</h3>
+            <p>Use this block for drone mapping, GIS support, terrain modelling, or project visualisation. Keep the language specific to the problems you solve.</p>
+            <span class="tag">Maps · Models · Insight</span>
+          </article>
+          <article class="service-card">
+            <h3>Survey and field data</h3>
+            <p>This section can highlight topographic survey, control, as-built capture, or site measurement services with short, confidence-building copy.</p>
+            <span class="tag">Capture · Check · Deliver</span>
+          </article>
+          <article class="service-card">
+            <h3>Ground intelligence for planning</h3>
+            <p>Position the business as a partner that helps teams reduce uncertainty early, before they commit time, budget, or mobilisation.</p>
+            <span class="tag">Plan · Reduce risk</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="approach">
+      <div class="container split">
+        <div class="process">
+          <div class="section-head">
+            <h2>A better first journey</h2>
+            <p>Strong landing pages keep one clear conversion goal and reveal supporting detail in a calm sequence instead of trying to say everything at once.</p>
+          </div>
+          <div class="steps">
+            <div class="step"><div class="step-num">1</div><div><strong>State the offer fast.</strong><p>Open with a headline that says what R Geoventures does and who it helps.</p></div></div>
+            <div class="step"><div class="step-num">2</div><div><strong>Show key capabilities.</strong><p>Use 3 focused service cards, not a dense paragraph or a generic feature grid.</p></div></div>
+            <div class="step"><div class="step-num">3</div><div><strong>Make contact easy.</strong><p>Drive visitors toward one action such as getting a quote or booking a call.</p></div></div>
+          </div>
+        </div>
+        <aside class="proof" id="why-us">
+          <div class="section-head">
+            <h2>How this direction fits</h2>
+            <p>The visual language is restrained and technical, which suits consulting, surveying, and geospatial work better than loud startup styling.</p>
+          </div>
+          <div class="proof-grid">
+            <div class="proof-item"><strong>Measured typography</strong><p>Cabinet Grotesk adds authority to headlines, while General Sans keeps body copy practical and readable.</p></div>
+            <div class="proof-item"><strong>Terrain-led visual identity</strong><p>The hero graphic references contour lines and field mapping without feeling like a cliché stock background.</p></div>
+            <div class="proof-item"><strong>One clear CTA</strong><p>The page is designed to funnel visitors toward an enquiry, which is usually the right goal for a small service business homepage.</p></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="cta">
+          <div>
+            <span class="eyebrow" style="background:rgba(255,255,255,.14);color:var(--color-text-inverse)">Ready to launch</span>
+            <h2 style="font-family:var(--font-display);font-size:var(--text-xl);line-height:1;letter-spacing:-.03em;margin-top:var(--space-4)">Next, we can turn this into a full GitHub Pages site with your real services, contact details, and branding.</h2>
+            <p style="margin-top:var(--space-4)">Once you confirm your exact business focus, I can help you build the final version, add sections like About and Projects, and prepare the repo structure for publishing on GitHub.</p>
+          </div>
+          <div class="hero-actions" style="margin-top:0">
+            <a class="btn btn-primary" href="mailto:hello@rgeoventures.com">Use as contact CTA</a>
+            <a class="btn btn-secondary" href="#top">Review hero</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>R Geoventures — landing page starter for GitHub Pages.</p>
+      <p>Built to be easy to expand into About, Services, Projects, and Contact sections.</p>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      const html = document.documentElement;
+      const toggle = document.querySelector('[data-theme-toggle]');
+      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      let theme = systemDark ? 'dark' : 'light';
+      const setIcon = () => {
+        toggle.innerHTML = theme === 'dark'
+          ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
+          : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+        toggle.setAttribute('aria-label', `Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`);
+      };
+      html.setAttribute('data-theme', theme);
+      setIcon();
+      toggle.addEventListener('click', () => { theme = theme === 'dark' ? 'light' : 'dark'; html.setAttribute('data-theme', theme); setIcon(); });
+
+      const mobileNav = document.getElementById('mobile-nav');
+      const menuButton = document.querySelector('.menu-toggle');
+      const navLinks = Array.from(document.querySelectorAll('.nav a')).map(a => a.cloneNode(true));
+      navLinks.forEach(link => mobileNav.appendChild(link));
+      menuButton?.addEventListener('click', () => {
+        const open = mobileNav.getAttribute('data-open') === 'true';
+        mobileNav.setAttribute('data-open', String(!open));
+        menuButton.setAttribute('aria-expanded', String(!open));
+      });
+      mobileNav.addEventListener('click', e => {
+        if (e.target.tagName === 'A') {
+          mobileNav.setAttribute('data-open', 'false');
+          menuButton.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
