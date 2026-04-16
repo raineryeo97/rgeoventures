@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>R Geoventures — Geospatial, Survey & Ground Intelligence</title>
-  <meta name="description" content="R Geoventures helps clients plan, map, and understand terrain through geospatial, survey, and ground intelligence services." />
+  <meta name="description" content="R Geoventures supports exploration planning, geological review, and project matching for mining and resource opportunities, helping clients connect technical insight with the right partners and pathways." />
   <meta property="og:title" content="R Geoventures" />
-  <meta property="og:description" content="Geospatial, survey, and ground intelligence for projects that need clarity on the ground." />
+  <meta property="og:description" content="Exploration planning, project matching, and geological insight." />
   <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://api.fontshare.com" />
   <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=cabinet-grotesk@500,700,800&display=swap" rel="stylesheet" />
@@ -114,15 +114,12 @@
     .service-card h3{font-size:var(--text-lg);font-family:var(--font-display);line-height:1.1}
     .service-card p{margin-top:var(--space-3);color:var(--color-text-muted)}
     .service-card .tag{display:inline-block;margin-top:var(--space-4);font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.08em;color:var(--color-primary)}
-    .split{display:grid;gap:var(--space-6)}
-    .process{padding:var(--space-6);background:var(--color-surface);border-radius:var(--radius-xl);border:1px solid color-mix(in srgb,var(--color-border) 78%, transparent)}
-    .steps{display:grid;gap:var(--space-4);margin-top:var(--space-6)}
-    .step{display:grid;grid-template-columns:auto 1fr;gap:var(--space-4);align-items:start;padding-top:var(--space-4);border-top:1px solid var(--color-divider)}
-    .step:first-child{padding-top:0;border-top:0}
-    .step-num{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--color-primary-highlight);color:var(--color-primary);font-size:var(--text-sm);font-weight:700}
-    .proof{padding:var(--space-6);background:linear-gradient(180deg,var(--color-surface),var(--color-surface-2));border-radius:var(--radius-xl);border:1px solid color-mix(in srgb,var(--color-border) 78%, transparent)}
-    .proof-grid{display:grid;gap:var(--space-4);margin-top:var(--space-6)}
-    .proof-item{padding:var(--space-4);border-radius:var(--radius-lg);background:color-mix(in srgb,var(--color-bg) 45%, var(--color-surface));border:1px solid color-mix(in srgb,var(--color-border) 70%, transparent)}
+    .advisors-grid{display:grid;gap:var(--space-4)}
+    .advisor-card{padding:var(--space-5);background:var(--color-surface);border:1px solid color-mix(in srgb,var(--color-border) 78%, transparent);border-radius:var(--radius-xl);box-shadow:var(--shadow-sm)}
+    .advisor-portrait{aspect-ratio:1/1;border-radius:calc(var(--radius-xl) - .35rem);background:linear-gradient(180deg,var(--color-surface-2),var(--color-surface-offset));border:1px solid color-mix(in srgb,var(--color-border) 72%, transparent);display:grid;place-items:center;color:var(--color-text-faint);font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.12em}
+    .advisor-card h3{margin-top:var(--space-4);font-size:var(--text-lg);font-family:var(--font-display);line-height:1.05}
+    .advisor-role{margin-top:var(--space-2);font-size:var(--text-sm);color:var(--color-primary);font-weight:600}
+    .advisor-note{margin-top:var(--space-2);font-size:var(--text-sm);color:var(--color-text-muted)}
     .cta{padding:clamp(3rem,7vw,5rem);background:var(--color-primary);color:var(--color-text-inverse);border-radius:calc(var(--radius-xl) + 8px);display:grid;gap:var(--space-6);box-shadow:var(--shadow-lg)}
     .cta p{max-width:56ch;color:color-mix(in srgb,var(--color-text-inverse) 78%, transparent)}
     .cta .btn-primary{background:var(--color-text-inverse);color:var(--color-primary)}
@@ -138,7 +135,7 @@
       .menu-toggle{display:none}
       .hero-grid{grid-template-columns:minmax(0,1.05fr) minmax(420px,.95fr)}
       .services{grid-template-columns:1.2fr .9fr .9fr}
-      .split{grid-template-columns:1.1fr .9fr}
+      .advisors-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
       .footer-inner{flex-direction:row;justify-content:space-between;align-items:center}
     }
     @media (max-width: 839px){
@@ -162,13 +159,11 @@
         <span class="brand-name">R Geoventures</span>
       </a>
       <nav class="nav" aria-label="Primary">
-        <a href="#services">Services</a>
-        <a href="#approach">Approach</a>
-        <a href="#why-us">Why us</a>
+        <a href="#services">Capabilities</a>
+        <a href="#advisors">Board of Advisors</a>
         <a href="#contact">Contact</a>
       </nav>
       <div class="header-actions">
-        <a class="btn btn-secondary" href="#contact">Get a quote</a>
         <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch theme">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         </button>
@@ -184,27 +179,27 @@
     <section class="hero" id="top">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <span class="eyebrow">Grounded project intelligence</span>
-          <h1>From terrain to decisions, R Geoventures gives projects a clearer view of the ground.</h1>
-          <p>Built for clients who need practical geospatial, survey, and site intelligence, this landing page positions R Geoventures as a precise, dependable partner for mapping, field data, and project planning.</p>
+          <span class="eyebrow">Geological advisory and opportunity matching</span>
+          <h1>Technical mining and geological advisory, kept clear and decision-ready.</h1>
+          <p>R Geoventures supports exploration, evaluation, and investment decisions with focused geological, geospatial, and technical advisory work for mining and resource projects.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#contact">Start a project</a>
             <a class="btn btn-secondary" href="#services">Explore services</a>
           </div>
           <div class="hero-meta" aria-label="Key highlights">
-            <div class="metric"><strong>Survey-ready</strong><span>Field-informed execution</span></div>
-            <div class="metric"><strong>Data-led</strong><span>Clear outputs for decisions</span></div>
+            <div class="metric"><strong>Exploration-focused</strong><span>From targeting to review</span></div>
+            <div class="metric"><strong>Decision-led</strong><span>Technical clarity for clients</span></div>
           </div>
         </div>
         <div class="hero-card" aria-hidden="true">
           <div class="grid-lines"></div>
           <div class="floating-panel">
-            <h2>Landing page concept</h2>
-            <p>A calm, technical first impression with terrain lines, measured spacing, and one strong call to action.</p>
+            <h2>How we help</h2>
+            <p>We help shape exploration direction, review opportunities, and connect projects with the right technical and commercial support.</p>
             <div class="panel-list">
-              <div class="panel-item"><span>Positioning</span><strong>Precision + trust</strong></div>
-              <div class="panel-item"><span>Audience</span><strong>Developers, contractors, planners</strong></div>
-              <div class="panel-item"><span>Primary CTA</span><strong>Get a quote</strong></div>
+              <div class="panel-item"><span>Focus</span><strong>Exploration planning, technical and commercial project review and support.</strong></div>
+              <div class="panel-item"><span>Audience</span><strong>Project owners, investors, and technical partners</strong></div>
+              <div class="panel-item"><span>Approach</span><strong>Strategic, selective and discussion led</strong></div>
             </div>
           </div>
           <svg class="terrain" viewBox="0 0 800 420" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -229,53 +224,61 @@
     <section class="section" id="services">
       <div class="container">
         <div class="section-head">
-          <h2>What the page says</h2>
-          <p>For a young consulting or field-services brand, the landing page should explain the offer immediately, then back it up with a few focused capabilities rather than a long generic list.</p>
+          <h2>Core capabilities</h2>
+          <p>R Geoventures works across the gap between capital, technical understanding, and project delivery. We help investors, project owners, and partners find the right geological, commercial, and operational fit.</p>
         </div>
         <div class="services">
           <article class="service-card">
-            <h3>Geospatial and mapping support</h3>
-            <p>Use this block for drone mapping, GIS support, terrain modelling, or project visualisation. Keep the language specific to the problems you solve.</p>
-            <span class="tag">Maps · Models · Insight</span>
+            <h3>Geological and exploration support</h3>
+            <p>Targeting support, mapping integration, drill-core interpretation, and structured technical inputs for exploration programs. Including data QA/QC, 3D interpretation support, and technical review workflows that improve confidence in project information.</p>
+            <span class="tag">Target · Interpret · Advance</span>
           </article>
           <article class="service-card">
-            <h3>Survey and field data</h3>
-            <p>This section can highlight topographic survey, control, as-built capture, or site measurement services with short, confidence-building copy.</p>
-            <span class="tag">Capture · Check · Deliver</span>
+            <h3>Exploration and project planning</h3>
+            <p>Supporting exploration strategy, geological review, and early-stage project direction with the right technical inputs.</p>
+            <span class="tag">Plan · Review · Execute</span>
           </article>
           <article class="service-card">
-            <h3>Ground intelligence for planning</h3>
-            <p>Position the business as a partner that helps teams reduce uncertainty early, before they commit time, budget, or mobilisation.</p>
-            <span class="tag">Plan · Reduce risk</span>
+            <h3>Investment and technical alignment</h3>
+            <p>Helping investors understand geological context, project potential, and technical risk in clearer commercial terms. Connecting project owners and investors with suitable technical, exploration, and mining-stage contractors.</p>
+            <span class="tag">Screen · Align · Coordinate</span>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section" id="approach">
-      <div class="container split">
-        <div class="process">
-          <div class="section-head">
-            <h2>A better first journey</h2>
-            <p>Strong landing pages keep one clear conversion goal and reveal supporting detail in a calm sequence instead of trying to say everything at once.</p>
-          </div>
-          <div class="steps">
-            <div class="step"><div class="step-num">1</div><div><strong>State the offer fast.</strong><p>Open with a headline that says what R Geoventures does and who it helps.</p></div></div>
-            <div class="step"><div class="step-num">2</div><div><strong>Show key capabilities.</strong><p>Use 3 focused service cards, not a dense paragraph or a generic feature grid.</p></div></div>
-            <div class="step"><div class="step-num">3</div><div><strong>Make contact easy.</strong><p>Drive visitors toward one action such as getting a quote or booking a call.</p></div></div>
-          </div>
+    <section class="section" id="advisors">
+      <div class="container">
+        <div class="section-head">
+          <h2>Board of Advisors</h2>
+          <p>A focused advisory bench across mining, technology, trade, investment, and logistics.</p>
         </div>
-        <aside class="proof" id="why-us">
-          <div class="section-head">
-            <h2>How this direction fits</h2>
-            <p>The visual language is restrained and technical, which suits consulting, surveying, and geospatial work better than loud startup styling.</p>
-          </div>
-          <div class="proof-grid">
-            <div class="proof-item"><strong>Measured typography</strong><p>Cabinet Grotesk adds authority to headlines, while General Sans keeps body copy practical and readable.</p></div>
-            <div class="proof-item"><strong>Terrain-led visual identity</strong><p>The hero graphic references contour lines and field mapping without feeling like a cliché stock background.</p></div>
-            <div class="proof-item"><strong>One clear CTA</strong><p>The page is designed to funnel visitors toward an enquiry, which is usually the right goal for a small service business homepage.</p></div>
-          </div>
-        </aside>
+        <div class="advisors-grid">
+          <article class="advisor-card">
+            <div class="advisor-portrait">Portrait 01</div>
+            <h3>Placeholder</h3>
+            <div class="advisor-role">Mining Advisor</div>
+            <p class="advisor-note">Exploration and geological project guidance.</p>
+          </article>
+          <article class="advisor-card">
+            <div class="advisor-portrait">Portrait 02</div>
+            <h3>YC Hwangbo</h3>
+            <div class="advisor-role">Technology Advisor</div>
+            <p class="advisor-note">IT, digital systems, and AI strategy. Chairman of Mobile C&amp;C.</p>
+          </article>
+          <article class="advisor-card">
+            <div class="advisor-portrait">Portrait 03</div>
+            <h3>Thomas Yeo</h3>
+            <div class="advisor-role">Trading and Investment Advisor</div>
+            <p class="advisor-note">Independent commodity markets experts with extensive experience in the Australian sector.</p>
+          </article>
+          <article class="advisor-card">
+            <div class="advisor-portrait">Portrait 04</div>
+            <h3>Arthur Ng</h3>
+            <div class="advisor-role">Industry Advisor</div>
+            <p class="advisor-note">Regional logistics and business coordination. Former GM of Metro.</p>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -283,13 +286,13 @@
       <div class="container">
         <div class="cta">
           <div>
-            <span class="eyebrow" style="background:rgba(255,255,255,.14);color:var(--color-text-inverse)">Ready to launch</span>
-            <h2 style="font-family:var(--font-display);font-size:var(--text-xl);line-height:1;letter-spacing:-.03em;margin-top:var(--space-4)">Next, we can turn this into a full GitHub Pages site with your real services, contact details, and branding.</h2>
-            <p style="margin-top:var(--space-4)">Once you confirm your exact business focus, I can help you build the final version, add sections like About and Projects, and prepare the repo structure for publishing on GitHub.</p>
+            <span class="eyebrow" style="background:rgba(255,255,255,.14);color:var(--color-text-inverse)">Get in touch</span>
+            <h2 style="font-family:var(--font-display);font-size:var(--text-xl);line-height:1;letter-spacing:-.03em;margin-top:var(--space-4)">Discuss a project or opportunity with R Geoventures.</h2>
+            <p style="margin-top:var(--space-4)">We support mining and exploration projects through technical review, planning, and partner coordination.</p>
           </div>
           <div class="hero-actions" style="margin-top:0">
-            <a class="btn btn-primary" href="mailto:hello@rgeoventures.com">Use as contact CTA</a>
-            <a class="btn btn-secondary" href="#top">Review hero</a>
+            <a class="btn btn-primary" href="mailto:raineryeo97@gmail.com">Contact Us</a>
+          
           </div>
         </div>
       </div>
@@ -298,8 +301,10 @@
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <p>R Geoventures — landing page starter for GitHub Pages.</p>
-      <p>Built to be easy to expand into About, Services, Projects, and Contact sections.</p>
+      <p>R Geoventures - Connecting investors, project owners, and technical partners across mining and exploration opportunities.
+
+</p>
+      <p>contact@Rgeoventures.com</p>
     </div>
   </footer>
 
